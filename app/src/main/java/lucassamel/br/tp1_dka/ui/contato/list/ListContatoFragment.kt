@@ -35,7 +35,7 @@ class ListContatoFragment : Fragment() {
         viewModel = ViewModelProvider(this, listContatoVMF)
             .get(ListContatoViewModel::class.java)
 
-        viewModel.quantidade.observe(viewLifecycleOwner){
+        viewModel.contatos.observe(viewLifecycleOwner){
             setUpLitsViewContatos(it)
         }
         viewModel.atualizarQuantidade()

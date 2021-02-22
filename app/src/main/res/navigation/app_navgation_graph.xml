@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_navgation_graph"
+    app:startDestination="@id/listContatoFragment">
+
+    <fragment
+        android:id="@+id/listContatoFragment"
+        android:name="lucassamel.br.tp1_dka.ui.contato.list.ListContatoFragment"
+        android:label="list_contato_fragment"
+        tools:layout="@layout/list_contato_fragment" />
+    <fragment
+        android:id="@+id/formContatoFragment"
+        android:name="lucassamel.br.tp1_dka.ui.contato.form.FormContatoFragment"
+        android:label="form_contato_fragment"
+        tools:layout="@layout/form_contato_fragment" />
+</navigation>

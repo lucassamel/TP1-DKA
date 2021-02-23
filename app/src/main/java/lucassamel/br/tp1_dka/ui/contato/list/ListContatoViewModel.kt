@@ -9,14 +9,10 @@ import kotlinx.coroutines.launch
 import lucassamel.br.tp1_dka.database.dao.ContatoDao
 import lucassamel.br.tp1_dka.model.Contato
 
-class ListContatoViewModel(
-    private val contatoDao: ContatoDao
-            ): ViewModel() {
+class ListContatoViewModel(private val contatoDao: ContatoDao): ViewModel() {
 
     private val _contatos = MutableLiveData<List<Contato>>()
     val contatos: LiveData<List<Contato>> = _contatos
-
-
 
     fun atualizarQuantidade(){
         viewModelScope.launch {

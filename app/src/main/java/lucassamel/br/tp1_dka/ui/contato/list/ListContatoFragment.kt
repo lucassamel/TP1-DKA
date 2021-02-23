@@ -12,12 +12,9 @@ import kotlinx.android.synthetic.main.list_contato_fragment.*
 import lucassamel.br.tp1_dka.R
 import lucassamel.br.tp1_dka.database.AppDatabase
 import lucassamel.br.tp1_dka.model.Contato
+import lucassamel.br.tp1_dka.model.ContatoUtil
 
 class ListContatoFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = ListContatoFragment()
-    }
 
     private lateinit var viewModel: ListContatoViewModel
 
@@ -25,14 +22,16 @@ class ListContatoFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel = ViewModelProvider(this).get(ListContatoViewModel::class.java)
+
         val view = inflater.inflate(R.layout.list_contato_fragment, container, false)
 
         val appDatabase = AppDatabase.getInstance(requireContext().applicationContext)
         val contatoDao = appDatabase.contatoDao()
         val listContatoVMF = ListContatoViewModelFactory(contatoDao)
 
-        viewModel = ViewModelProvider(this, listContatoVMF)
+        viewModel = ViewModelProvider(this,listContatoVMF).get(ListContatoViewModel::class.java)
+
+        viewModel = ViewModelProvider(this)
             .get(ListContatoViewModel::class.java)
 
         viewModel.contatos.observe(viewLifecycleOwner){
@@ -54,13 +53,10 @@ class ListContatoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fabFormContato.setOnClickListener {
+            ContatoUtil.contatoSelecionado = null
+
             findNavController().navigate(R.id.formContatoFragment)
         }
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        // TODO: Use the ViewModel
     }
 
 }

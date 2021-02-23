@@ -12,13 +12,5 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val appDatabase = AppDatabase.getInstance(this.applicationContext)
-
-        GlobalScope.launch {
-            val contato = Contato("Lucas",12345678)
-            val contatoDao = appDatabase.contatoDao()
-            contatoDao.create(contato)
-        }
-
     }
 }

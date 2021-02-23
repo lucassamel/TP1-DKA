@@ -8,8 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import kotlinx.android.synthetic.main.form_contato_fragment.*
 import lucassamel.br.tp1_dka.R
 import lucassamel.br.tp1_dka.database.AppDatabase
+import lucassamel.br.tp1_dka.model.Contato
+import lucassamel.br.tp1_dka.model.ContatoUtil
 
 class FormContatoFragment : Fragment() {
 
@@ -27,7 +30,7 @@ class FormContatoFragment : Fragment() {
         val application = requireActivity().application
         val appDatabase = AppDatabase.getInstance(application)
         val carroDao = appDatabase.contatoDao()
-        val formContatoViewModelFactory = FormContatoViewModelFactory(carroDao, application)
+        val formContatoViewModelFactory = FormContatoViewModelFactory(carroDao)
 
         formContatoViewModel = ViewModelProvider(this, formContatoViewModelFactory)
             .get(FormContatoViewModel::class.java)
@@ -52,8 +55,24 @@ class FormContatoFragment : Fragment() {
         return view
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        if (ContatoUtil.contatoSelecionado != null)
+            fillContactForm(ContatoUtil.contatoSelecionado!!)
+
+            btnSalvarContato.setOnClickListener {
+            val name = textFormName.text.toString()
+            val phoneNumber = textFormNumber.text.toString()
+
+            formContatoViewModel.store(name)
+        }
+    }
+
+    private fun fillContactForm(contactSelected: Contato) {
+        textFormName.setText(contactSelected.nome)
+//        editTextFormHomePhoneNumber.setText(phoneSelected.phoneNumber)
+        btnSalvarContato.text = "Atualizar"
     }
 
 }

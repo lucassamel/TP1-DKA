@@ -5,9 +5,8 @@ import androidx.lifecycle.ViewModelProvider
 import lucassamel.br.tp1_dka.database.dao.ContatoDao
 
 class ListContatoViewModelFactory(
-    private val contatoDao: ContatoDao
-)
-    : ViewModelProvider.Factory{
+    private val contatoDao: ContatoDao)
+    : ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(ListContatoViewModel::class.java))
